@@ -9,9 +9,6 @@ class MapTest extends Component {
   constructor(props){
     super(props);
     this.state = {
-      region: [],
-      images: this.props.navigation.getParam('images'),
-      imagedesc: this.props.navigation.getParam('imagedesc'),
       modalVisible: false,
       showimage: [],
       send_photo: [],

@@ -1,33 +1,80 @@
 import React from 'React'
 import { TouchableOpacity, TextInput, View, Dimensions, StyleSheet, Text, ScrollView, TouchableHighlight, Image, Button } from 'react-native'
 import RNFetchBlob from 'react-native-fetch-blob'
-import MapTest from './Map.js'
+
 const { width, height } = Dimensions.get('window');
 class Submit extends React.Component {
   constructor(props){
       super(props)
       this.state = {
-          title: '',
-          description: '',
+          photo_title: '',
+          photo_description: '',
           uri: null,
           images: this.props.navigation.getParam('images'),
-          imagereturn: []
+          imagedesc: this.props.navigation.getParam('imagedesc'),
+          title_desc:'',
+          user_id : this.props.navigation.getParam('user_id')
+
       }
-      this.handleTitle = this.handleTitle.bind(this)
-      
+      this.handleTitle = this.handleTitle.bind(this);
+      this.handleDescription = this.handleDescription.bind(this);
+      this.makeTitle = this.makeTitle.bind(this);
+      this.handleTitleDescription = this.handleTitleDescription.bind(this);
+      this.showTitle = this.showTitle.bind(this);
+      this.goMap = this.goMap.bind(this);
   }
   
   handleTitle = text => {
-    this.setState({ title: text });
+    this.setState({ photo_title: text });
   };
  
-  handleDescription = text => {
-    this.setState({ description: text });
-  };  
+  handleTitleDescription = (text) =>{
+    this.setState({title_desc:text})
+  }
+  handleDescription = (text, image) => {
+    var b = this.state.imagedesc;
+    b.map((find) => {
+      if(find===image){
+        find.desc = text
+      }
+      return (b)
+    })
+    this.setState({ imagedesc: b });
+    
+  };
+  goMap = () => {
+    var i = this.state.images
+    i.push({name : 'photo_title', data:JSON.stringify({photo_title:this.state.photo_title, title_desc:this.state.title_desc, _uri:this.state.uri})})
+    this.setState = {
+      images: i
+    }
+    this.props.navigation.navigate('Map', {images: this.state.images, imagedesc: this.state.imagedesc, user_id: this.state.user_id})
+  }  
 
   makeTitle= (i) => {
       this.setState({ uri: i.uri });
   }
+
+  showTitle= () => {
+    if(this.state.uri === null){
+      a = this.state.images;
+      return (
+        <Image
+        style = {styles.image}
+        source = {{uri: a[0]._uri}}
+        />)
+    }
+    else {
+      return (
+        <Image
+            style = {styles.image}
+            source = {{uri: this.state.uri}}
+            />
+      )
+    }
+  }
+
+  /*
   componentDidMount = () =>{
       if (this.state.images.didCancel) {
             }
@@ -36,10 +83,10 @@ class Submit extends React.Component {
             else if (this.state.images.customButton) {
             }
             else {
-        RNFetchBlob.fetch('POST',  'https://0ff84670.ngrok.io/spring01/upreturn', {
+        RNFetchBlob.fetch('POST',  'https://331d8d98.ngrok.io/appServer/postUpload/1', {
             'Content-Type': 'multipart/form-data',
-        }, 
-        this.state.images  
+        },this.state.images
+        //this.state.images  
         )
         .uploadProgress((written, total) => {
           console.log('uploaded', written / total)
@@ -57,72 +104,73 @@ class Submit extends React.Component {
         })
                 
         }
-  }
+  }*/
   
   render() {
-    /* 2. Get the param, provide a fallback value if not available */
-    const { navigation } = this.props;
-    const uri = navigation.getParam('images');
     return (
-        <View>
+        <View style={{justifyContent:'center'}}>
         <Button
           title="Map"
-          onPress={() => this.props.navigation.navigate('Map', {images: this.state.images})}
+          onPress={() => this.goMap()}
         />
+        <Text>{JSON.stringify(this.state.imagedesc)}</Text>
+        <ScrollView centerContent = {true} contentContainerStyle={styles.scrollContainer}>
         
-        <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <Text>{JSON.stringify(this.state.images)}</Text>
-        <Text>{JSON.stringify(this.state.imagereturn)}</Text>
-        {this.state.imagereturn &&
-          this.state.imagereturn.map((image, i) => {
-            return (
-              <Image key={i}
-                  style={styles.image}
-                  source={{ uri: 'https://0ff84670.ngrok.io' + image.url }}
-                />
-              
-              
-            )
-          })
-        }
         
+        <View>
         
         <TextInput
           style={styles.input}
           underlineColorAndroid="transparent"
-          placeholder="제목"
-          placeholderTextColor="#9a73ef"
+          placeholder="여행일지 제목"
+          placeholderTextColor="black"
           autoCapitalize="none"
           onChangeText={this.handleTitle}
         />
+        </View>
+        <View>
+        {this.showTitle()}
+        </View>
+        <View>
         <TextInput
           multiline={true}
-          numberOfLines={4}
-          style={styles.input}
+          numberOfLines={5}
+          style={styles.descinput}
           underlineColorAndroid="transparent"
           placeholder="내용"
-          placeholderTextColor="#9a73ef"
+          placeholderTextColor="white"
           autoCapitalize="none"
-          onChangeText={this.handleDescription}
+          onChangeText={this.handleTitleDescription}
         />
-        
-          
-          {
-            uri.map((uri, i) => {
-              return (
-                <TouchableHighlight
+        </View>
+        {this.state.imagedesc &&
+          this.state.imagedesc.map((image, i) => {
+            return (
+              <View key={i}>
+              <TouchableHighlight
                   key={i}
-                  onPress={() => this.makeTitle(uri)}
+                  onPress={() => this.makeTitle(image._uri)}
                   underlayColor='transparent'
                 >
                   <Image
                     style={styles.image}
-                    source={{ uri: uri.uri }}
+                    source={{ uri: image._uri }}
                   />
                 </TouchableHighlight>
-              )
-            })
-          }
+                <TextInput
+                multiline={true}
+                numberOfLines={5}
+                style={styles.descinput}
+                underlineColorAndroid="transparent"
+                placeholder="내용"
+                placeholderTextColor="black"
+                autoCapitalize="none"
+                onChangeText={(text) => this.handleDescription(text, image)}
+              />
+              </View>
+            )
+          })
+        }
         
         
         </ScrollView>
@@ -140,9 +188,18 @@ styles = StyleSheet.create({
   input: {
     margin: 15,
     height: 40,
-    borderColor: "#7a42f4",
-    borderWidth: 3
+    width: width-30,
+    borderColor: "black",
+    borderWidth: 1
   },
+  descinput: {
+    margin: 15,
+    height: 160,
+    width : width-30,
+    borderColor: "black",
+    borderWidth: 1
+  },
+  
   centerLoader: {
     height: height - 100,
     width,
@@ -150,7 +207,10 @@ styles = StyleSheet.create({
     alignItems: 'center'
   },
   image: {
-    width: width / 2, height: width / 2
+    width: width, height: 200
+  },
+  titleimage:{
+    width: width, height: 200
   },
   title: {
     textAlign: 'center',
