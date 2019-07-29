@@ -31,7 +31,7 @@ class Register extends Component {
   }
 
     doublecheck = () => {
-        fetch('https://bebe7948.ngrok.io/appServer/member/checkEmail/', {
+        fetch('https://15f93a33.ngrok.io/appServer/member/checkEmail', {
         method: 'POST',
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({email_address: this.state.email_address})
@@ -45,7 +45,7 @@ class Register extends Component {
     }
     
     registers = () => {
-        fetch('https://bebe7948.ngrok.io/appServer/member/signIn', {
+        fetch('https://15f93a33.ngrok.io/appServer/member/signIn', {
         method: 'POST',
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({user_name: this.state.user_name, email_address: this.state.email_address, user_pwd: this.state.user_pwd})

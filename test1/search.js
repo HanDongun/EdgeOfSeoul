@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import { Dimensions, TouchableHighlight, Modal, Image, Button, StyleSheet, Text, View, Alert, ScrollView } from 'react-native';
+import { Dimensions, TouchableHighlight, Modal, Image, Button, StyleSheet, Text, View, Alert, ScrollView, TextInput } from 'react-native';
 import MapView, { PROVIDER_GOOGLE, Polygon, Marker } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
 import RNFetchBlob from 'react-native-fetch-blob'
 
 const { width, height } = Dimensions.get('window');
 
-class MapTest extends Component {
+class Search_place extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -13,9 +13,11 @@ class MapTest extends Component {
       showimage: [],
       send_photo: [],
       image_return: '',
-      user_id : this.props.navigation.getParam('user_id')
+      search_keyword:'',
+      user_id : this.props.navigation.getParam('user_id'),
+      place : null
     }
-    this.complete = this.complete.bind(this);
+    this.search_place = this.search_place.bind(this);
     this.setModalVisible = this.setModalVisible.bind(this);
     this.check_send = this.check_send.bind(this);
    }
@@ -28,28 +30,20 @@ class MapTest extends Component {
       })
   }
   
-  complete = () => {
-    var final = this.state.images;
-    this.state.imagedesc.map(image => {
-      final.push(image);
-    })
-    this.state = {
-      send_photo : final
-    }
-    RNFetchBlob.fetch('POST',  'https://e410ee5c.ngrok.io/spring01/up/' + this.state.user_id , {
-                    'Content-Type': 'multipart/form-data',
-        }, 
-        this.state.send_photo
-               
-        ).then((res) => {
-          this.setState({
-            image_return : res.json()
-          })
-        })
-        .catch((err) => {
-                        // error handling ..
-        })
-  }
+  search_place = () => {
+    fetch('https://15f93a33.ngrok.io/appServer/member/login', {
+    method: 'POST',
+    headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+    body: JSON.stringify({search_keyword:this.state.search_keyword})
+})
+.then((response) => response.json())
+.then((responseJson) => {this.setState({
+    place: responseJson, 
+})}
+)
+.catch((err) => { console.log(err); })
+}
+  
 
   check_send = () => {
     if(image_return ===1){
@@ -62,11 +56,17 @@ class MapTest extends Component {
 
 
   render () {
-    const { navigation } = this.props;
-    const uri = navigation.getParam('images');
     return (
       <View style={styles.container}>
-        {this.image_return && this.check_send()}
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.inputs}
+              placeholder="검색어를 입력하세요"
+              underlineColorAndroid='transparent'
+              onChangeText={(word) => this.setState({search_keyword: word})}/>
+        </View>
+        <Button title="완료" onPress={() => this.search_place()}>
+        </Button>
+        {/*
         <Modal
           animationType="slide"
           transparent={false}
@@ -100,10 +100,10 @@ class MapTest extends Component {
             </View>
           </View>
           </ScrollView>
-        </Modal>
+            </Modal>*/}
         <View style={{flex:1, justifyContent:'flex-start'}}>
-        <Button title="완료" onPress={() => this.complete()}>
-        </Button>
+        
+        
         </View>
         <MapView  
           provider={PROVIDER_GOOGLE}
@@ -126,15 +126,15 @@ class MapTest extends Component {
         strokeColor="#3399ff"
         fillColor="#80bfff"
       />
-      {this.state.imagedesc.map((image, i) => {
+      {this.state.place && this.state.place.map((place, i) => {
         return(
         <Marker 
             key = {i}
-            coordinate={{latitude: image.latitude,
-              longitude: image.longitude,
+            coordinate={{latitude: place.latitude,
+              longitude: place.longitude,
             }}
-            onPress = { () => this.setModalVisible(true, image.latitude, image.longitude)}
-            title = {JSON.stringify(image)}
+            onPress = { () => this.setModalVisible(true, place.latitude, place.longitude)}
+            title = {JSON.stringify(place.title)}
          />)
       })}
         </MapView>
@@ -142,12 +142,13 @@ class MapTest extends Component {
     )   
   }
 }
+
 const styles = StyleSheet.create({
   container: { ... StyleSheet.absoluteFillObject },
-  map: { ...StyleSheet.absoluteFillObject, top:25 },
+  map: { ...StyleSheet.absoluteFillObject, top:60 },
   image: {
     width: width / 2, height: width / 2
   },
 
 })
-export default MapTest
+export default Search_place

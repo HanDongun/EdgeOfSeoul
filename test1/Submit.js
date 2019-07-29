@@ -42,9 +42,10 @@ class Submit extends React.Component {
     this.setState({ imagedesc: b });
     
   };
+  
   goMap = () => {
     var i = this.state.images
-    i.push({name : 'photo_title', data:JSON.stringify({photo_title:this.state.photo_title, title_desc:this.state.title_desc, _uri:this.state.uri})})
+    i.push({name : 'photo_title',  data:JSON.stringify({photo_title:this.state.photo_title, title_desc:this.state.title_desc})})
     this.setState = {
       images: i
     }

@@ -28,7 +28,7 @@ class Login extends Component {
       Alert.alert("확인", "이메일이나 비밀번호를 확인하세요.")
     }
     else{
-    fetch('https://bebe7948.ngrok.io/appServer/member/login', {
+    fetch('https://15f93a33.ngrok.io/appServer/member/login', {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     body: JSON.stringify({email_address: this.state.email_address, user_pwd: this.state.user_pwd})
@@ -53,7 +53,7 @@ gomain = () => {
           ])
     }
     else if(this.state.returnchecker.checker>=1){
-        this.props.navigation.navigate("MainS", {user_id:this.state.returnchecker.user_id})
+        this.props.navigation.navigate("MainS", {log_info: this.state.returnchecker, user_id: this.state.returnchecker.user_id})
     }
 }
 

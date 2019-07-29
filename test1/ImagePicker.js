@@ -16,10 +16,9 @@ class ImagePickers extends React.Component {
       imagedesc: [],
       longitude: '',
       latitude: '',
-      user_id : this.props.navigation.getParam('user_id')
+      //user_id : this.props.navigation.getParam('user_id')
     }
     this.handleDelete = this.handleDelete.bind(this);    
-    this.ComponentDidMount = this.ComponentDidMount.bind(this);
   }
   
   handleChoosePhoto = () => {
@@ -28,7 +27,6 @@ class ImagePickers extends React.Component {
     };
     
     ImagePicker.launchImageLibrary(options, response => {
-     const data = new FormData();
      this.setState({
         uri: response.uri,
         longitude: response.longitude,
@@ -47,30 +45,6 @@ class ImagePickers extends React.Component {
 
   });}
   
-  ComponentDidMount = () =>{
-  if (this.state.uri.didCancel) {
-            }
-            else if (this.state.uri.error) {
-            }
-            else if (this.state.uri.customButton) {
-            }
-            else {
-                let source = { uri: this.state.uri }
-                RNFetchBlob.fetch('POST',  'https://e410ee5c.ngrok.io/spring01/up', {
-                    'Content-Type': 'multipart/form-data',
-                }, 
-                this.state.images
-               
-                ).then((res) => {
-                    })
-                    .catch((err) => {
-                        // error handling ..
-                    })
-                this.setState({
-                    imagereturn: source
-                });
-            }
-  }
   
   handleDelete = itemId => {
     const items = this.state.images.filter(item => item !== itemId);
@@ -85,7 +59,7 @@ class ImagePickers extends React.Component {
       <Button title="Choose Photo" onPress={this.handleChoosePhoto.bind(this)} /> 
       <Button
           title="submit"
-          onPress={() => this.props.navigation.navigate('Submit', {images: this.state.images, imagedesc: this.state.imagedesc, user_id: this.state.user_id})}
+          onPress={() => this.props.navigation.navigate('Submit', {images: this.state.images, imagedesc: this.state.imagedesc, /*user_id: this.state.user_id*/})}
         />
         <Text>{JSON.stringify(this.state.imagedesc)}</Text>
       <ScrollView contentContainerStyle={styles.scrollContainer}>

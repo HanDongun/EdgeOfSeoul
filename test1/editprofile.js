@@ -11,17 +11,18 @@ import {
   ScrollView
 } from 'react-native';
 import RNFetchBlob from 'react-native-fetch-blob'
-
+import ImagePicker from 'react-native-image-picker'
 class EditProfile extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
         user_desc: '',
-        uri: null
+        uri: null,
+        //user_id: this.props.navigation.getParms(user_id)
     }
 
-    this.doublecheck = this.doublecheck.bind(this);
+    
     this.registers = this.registers.bind(this);
     this.handleChoosePhoto = this.handleChoosePhoto.bind(this);
   }
@@ -40,7 +41,7 @@ class EditProfile extends Component {
   });}
     
     registers = () => {
-        RNFetchBlob.fetch('POST',  'https://e410ee5c.ngrok.io/spring01/up', {
+        RNFetchBlob.fetch('POST',  'https://e410ee5c.ngrok.io/spring01/up/'  /*this.state.user_id*/, {
                     'Content-Type': 'multipart/form-data',
         }, 
         [

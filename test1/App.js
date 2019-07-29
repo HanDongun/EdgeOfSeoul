@@ -10,11 +10,15 @@ import Submit from './Submit.js'
 import FindPwd from './findpwd.js'
 import Profile from './profile.js'
 import EditProfile from './editprofile.js'
+import Search_place from './search.js'
 
 const RootStack = createStackNavigator(
   {
   
-    Home: Login,
+    Home: createBottomTabNavigator({
+      일지보기: Profile,
+      일지추가: ImagePickers,
+      관광지검색: Search_place}),
     Register: Register,
     FindPwd: FindPwd,
     Map: MapTest,
