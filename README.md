@@ -25,6 +25,5 @@
 
 ### 관광지 검색
 
-<img src = './assets/관광지1.jpg' width = '400' height = '640' />
-<img src = './assets/관광지2.jpg' width = '400' height = '640' />
+<img src = './assets/관광지1.jpg' width = '400' height = '640' />     <img src = './assets/관광지2.jpg' width = '400' height = '640' />
 <img src = './assets/관광지3.jpg' width = '400' height = '640' />
