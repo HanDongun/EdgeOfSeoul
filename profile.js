@@ -26,7 +26,7 @@ export default class Profile extends Component{
   }
 
   getPost = (post_id) => {
-    RNFetchBlob.fetch('POST',  'https://487c1530.ngrok.io/appServer/viewPost/' + this.state.user_id + '/' + post_id , {
+    RNFetchBlob.fetch('POST',  web_url + this.state.user_id + '/' + post_id , {
       
     }, 
     ).then(res => res.json())
@@ -42,7 +42,7 @@ export default class Profile extends Component{
   }
 
   componentDidMount = () => {
-    RNFetchBlob.fetch('POST',  'https://487c1530.ngrok.io/appServer/appMain/' + this.state.user_id , {
+    RNFetchBlob.fetch('POST',  web_url + this.state.user_id , {
       
     }, 
     ).then(res => res.json())
@@ -77,7 +77,7 @@ export default class Profile extends Component{
         <Container style={styles.container}>
         <Header style={styles.header}>
           <Left>
-          <Thumbnail circular source = {{uri:'https://487c1530.ngrok.io' + this.state.log_info.user_profile_pic_url }} style={{resizeMode:'contain', flex: 1}}/>
+          <Thumbnail circular source = {{uri:web_url + this.state.log_info.user_profile_pic_url }} style={{resizeMode:'contain', flex: 1}}/>
           </Left>
           <Body>
           <Text style={{color:'#FFFFFF', fontWeight:'bold', fontSize:18}}>{this.state.log_info.user_name}</Text>
@@ -103,7 +103,7 @@ export default class Profile extends Component{
               </CardItem>
               <CardItem>
               <Body>
-                <Image source={{uri: 'https://487c1530.ngrok.io' + image.title_photo_url}} style={{height:350, width:320, resizeMode:'contain', flex: 1}}/>
+                <Image source={{uri: web_url + image.title_photo_url}} style={{height:350, width:320, resizeMode:'contain', flex: 1}}/>
               </Body>
               </CardItem>
                 
@@ -135,7 +135,7 @@ export default class Profile extends Component{
                     <CardItem>
                       <Body>
                         <Text>{this.state.title_info.photo_title}</Text>
-                        <Image source={{uri: 'https://487c1530.ngrok.io' + image.photo_url}} style={{height:350, width:310, resizeMode:'contain', flex: 1}}/>
+                        <Image source={{uri: web_url + image.photo_url}} style={{height:350, width:310, resizeMode:'contain', flex: 1}}/>
                         <Text>
                         {image.photo_description}
                         </Text>  
