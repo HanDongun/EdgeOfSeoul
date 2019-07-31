@@ -40,7 +40,7 @@ class EditProfile extends Component {
   });}
     
     registers = () => {
-        RNFetchBlob.fetch('POST',  'https://487c1530.ngrok.io/appServer/member/profile_alter/' + this.state.user_id, {
+        RNFetchBlob.fetch('POST',  web_url + this.state.user_id, {
                     'Content-Type': 'multipart/form-data',
         }, 
         [
@@ -66,7 +66,7 @@ class EditProfile extends Component {
       <View style={styles.container}>
         <View>
        
-        {this.state.image_return && <Image source={{uri:'https://487c1530.ngrok.io' + this.state.image_return.photo_url}} style={{height:50, width:50, resizeMode:'contain', flex: 1}}/>}
+        {this.state.image_return && <Image source={{uri:web_url + this.state.image_return.photo_url}} style={{height:50, width:50, resizeMode:'contain', flex: 1}}/>}
         <Button title="Choose Photo" onPress={this.handleChoosePhoto} />
         </View>
         <View style={styles.inputContainer}>
