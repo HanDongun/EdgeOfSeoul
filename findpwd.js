@@ -27,7 +27,7 @@ class FindPwd extends Component {
 
     
     registers = () => {
-        fetch('https://487c1530.ngrok.io/member/findPw', {
+        fetch(web_url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({user_name: this.state.name, email_address: this.state.email})
