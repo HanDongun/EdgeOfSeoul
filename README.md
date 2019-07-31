@@ -30,9 +30,15 @@
 
 ### 프로필 화면
 
+<img src = './assets/프로필1.jpg' width = '400' height = '640' />
+
 ### 일지 보기
 
+<img src = './assets/프로필3.jpg' width = '400' height = '640' />   <img src = './assets/프로필4.jpg' width = '400' height = '640' />
+
 ### 일지별 지도
+
+<img src = './assets/프로필5.jpg' width = '400' height = '640' />   <img src = './assets/프로필6.jpg' width = '400' height = '640' />
 
 ### 일지 추가
 
