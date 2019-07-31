@@ -16,3 +16,5 @@
 * 관광지 검색
   * 관광지 사진 보기
   
+<img src = './assets/로그인.jpg' width = '400' height = '640' />
+
