@@ -41,7 +41,7 @@ class MapTest extends Component {
     this.setState({ send_photo: final})
   }
   complete = () => {
-    RNFetchBlob.fetch('POST',  'https://487c1530.ngrok.io/appServer/postUpload/' + this.state.user_id , {
+    RNFetchBlob.fetch('POST',  web_url + this.state.user_id , {
                     'Content-Type': 'multipart/form-data',
         }, 
         this.state.send_photo
