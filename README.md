@@ -15,10 +15,15 @@
     * 일지 지도 보기
 * 관광지 검색
   * 관광지 사진 보기
-  
+
+
+### 로그인
 <img src = './assets/로그인.jpg' width = '400' height = '640' />
 
+### 회원가입
 <img src = './assets/회원가입1.jpg' width = '400' height = '640' />   <img src = './assets/회원가입2.jpg' width = '400' height = '640' />
+
+### 관광지 검색
 
 <img src = './assets/관광지1.jpg' width = '400' height = '640' />
 <img src = './assets/관광지2.jpg' width = '400' height = '640' />
