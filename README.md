@@ -28,6 +28,9 @@
 
 <img src = './assets/회원가입1.jpg' width = '400' height = '640' />   <img src = './assets/회원가입2.jpg' width = '400' height = '640' />
 
+### 프로필 화면
+
+
 ### 일지 추가
 
 <img src = './assets/일지작성1.jpg' width = '400' height = '640' />   <img src = './assets/일지작성2.jpg' width = '400' height = '640' />
