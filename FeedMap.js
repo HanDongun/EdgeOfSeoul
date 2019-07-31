@@ -48,7 +48,7 @@ class FeedMap extends Component {
                   <Card key = {i}>
                     <CardItem>
                       <Body>
-                        <Image source={{uri: 'https://ce4c367a.ngrok.io' + image.photo_url}} style={{height:350, width:310, resizeMode:'contain', flex: 1}}/>
+                        <Image source={{uri: 'https://487c1530.ngrok.io' + image.photo_url}} style={{height:350, width:310, resizeMode:'contain', flex: 1}}/>
                         <Text>
                         {image.photo_description}
                         </Text>  
@@ -98,7 +98,6 @@ class FeedMap extends Component {
               longitude: Number(image.photo_longitude),
             }}
             onPress = { () => this.setModalVisible(true, image.photo_latitude, image.photo_longitude)}
-            title = {JSON.stringify(image)}
          />)
       })}
         </MapView>
@@ -112,6 +111,5 @@ const styles = StyleSheet.create({
   image: {
     width: width / 2, height: width / 2
   },
-
 })
 export default FeedMap

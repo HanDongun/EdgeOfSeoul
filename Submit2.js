@@ -1,6 +1,6 @@
 import React from 'React'
-import { TouchableOpacity, TextInput, View, Dimensions, StyleSheet, Text, ScrollView, TouchableHighlight, Image, Alert } from 'react-native'
-import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Content, Container, Header } from 'native-base';
+import { TouchableOpacity, TextInput, View, Dimensions, StyleSheet, Text, ScrollView, Image, Alert } from 'react-native'
+import { Card, CardItem, Thumbnail, Body, Title, Button, Content, Container, Header, Footer } from 'native-base';
 
 const { width, height } = Dimensions.get('window');
 class Submit2 extends React.Component {
@@ -69,35 +69,34 @@ class Submit2 extends React.Component {
   
   render() {
     return (
-      <Container>
-        <Card>
-          <TouchableOpacity
-            onPress={() => this.goMap()}
-            >
-          <Text>Map</Text>
-          </TouchableOpacity>
-          </Card>
+      <Container style={styles.container}>
+        <Header style={styles.header}>
+          <Title>
+            <Text style={{fontSize:32, fontWeight:'bold'}}>일지 작성</Text>
+          </Title>
+        </Header>
         <Content>
           
           <Card>
-            <CardItem>
-              <Body>
+            <CardItem  style={styles.cardTitle}>
+              
                 <TextInput
+                style={{fontSize:16}}
                 placeholder="여행일지 제목"
                 placeholderTextColor="black"
                 autoCapitalize="none"
                 onChangeText={this.handleTitle}
                 />
-              </Body>
+              
             </CardItem>
         </Card>
         {this.state.imagedesc &&
           this.state.imagedesc.map((image, i) => {
             return (
             <Card key = {i}>
-              <CardItem>
+              <CardItem style={styles.cardImage}>
               <Body>
-                <Image source={{uri: image._uri}} style={{height:350, width:310, resizeMode:'contain', flex: 1}}/>
+                <Image source={{uri: image._uri}} style={{height:350, width:320, resizeMode:'contain', flex: 1}}/>
                 <TextInput
                 multiline={true}
                 numberOfLines={5}
@@ -112,11 +111,36 @@ class Submit2 extends React.Component {
           })
         }
         </Content>
+        <Footer style={styles.footer}>
+          <TouchableOpacity
+          onPress={() => this.goMap()}
+          
+          >
+          <Text style={{color:'#FFFFFF', fontSize:20, fontWeight:'bold'}}>Map</Text>
+          </TouchableOpacity>
+        </Footer>
       </Container>
     );
   }
 }
 styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#C4CACC'
+  },
+  header: {
+    fontSize: 32,
+    backgroundColor: '#7A7E80',
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  content: {
+
+  },
+  footer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#7A7E80'
+  },
   scrollContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -153,6 +177,13 @@ styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     padding: 20
+  },
+  cardTitle: {
+    fontSize: 20,
+    alignItems: 'center'
+  },
+  cardImage: {
+    
   }
 })
 export default Submit2

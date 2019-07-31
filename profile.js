@@ -26,7 +26,7 @@ export default class Profile extends Component{
   }
 
   getPost = (post_id) => {
-    RNFetchBlob.fetch('POST',  'https://ce4c367a.ngrok.io/appServer/viewPost/' + this.state.user_id + '/' + post_id , {
+    RNFetchBlob.fetch('POST',  'https://487c1530.ngrok.io/appServer/viewPost/' + this.state.user_id + '/' + post_id , {
       
     }, 
     ).then(res => res.json())
@@ -42,7 +42,7 @@ export default class Profile extends Component{
   }
 
   componentDidMount = () => {
-    RNFetchBlob.fetch('POST',  'https://ce4c367a.ngrok.io/appServer/appMain/' + this.state.user_id , {
+    RNFetchBlob.fetch('POST',  'https://487c1530.ngrok.io/appServer/appMain/' + this.state.user_id , {
       
     }, 
     ).then(res => res.json())
@@ -74,24 +74,41 @@ export default class Profile extends Component{
   render(){
     
       return (
-        <Container>
-        <Header>
+        <Container style={styles.container}>
+        <Header style={styles.header}>
+          <Left>
+          <Thumbnail circular source = {{uri:'https://487c1530.ngrok.io' + this.state.log_info.user_profile_pic_url }} style={{resizeMode:'contain', flex: 1}}/>
+          </Left>
           <Body>
-          {/* <Thumbnail source={require('./Image/Sebs.png')} onPress={()=>alert("Good")}/> */}
-          <Text>{this.state.log_info.user_name}</Text>
+          <Text style={{color:'#FFFFFF', fontWeight:'bold', fontSize:18}}>{this.state.log_info.user_name}</Text>
+          <Text style={{color:'#FFFFFF'}}>{this.state.log_info.user_desc}</Text>
           </Body>
+          <Right>
+          <TouchableHighlight onPress={() => this.props.navigation.navigate("EditProfile", {user_id:this.state.user_id})}>
+          <Text>편집</Text>
+          </TouchableHighlight>
+          </Right>
         </Header>
-        <Content>
+        <Content contentContainerStyle={styles.content}>
         <Card>
           {this.state.title_info && this.state.title_info.map((image, i) =>{
           return(
             <TouchableHighlight key={i} onPress={()=>this.getPost(image.post_id)}>
+              <Card>
+              
               <CardItem>
                 <Body>
-                <Text>{image.post_title}</Text>
-                <Image source={{uri: 'https://ce4c367a.ngrok.io' + image.title_photo_url}} style={{height:350, width:320, resizeMode:'contain', flex: 1}}/>
+                <Text style={{fontSize:16}}>{image.post_title}</Text>
                 </Body>
               </CardItem>
+              <CardItem>
+              <Body>
+                <Image source={{uri: 'https://487c1530.ngrok.io' + image.title_photo_url}} style={{height:350, width:320, resizeMode:'contain', flex: 1}}/>
+              </Body>
+              </CardItem>
+                
+              
+              </Card>
             </TouchableHighlight>
             )}
           )}
@@ -103,9 +120,12 @@ export default class Profile extends Component{
           onRequestClose={() => {
             this.setModalVisible(!this.state.modalVisible, "uri");
           }}>
-          <TouchableHighlight onPress={() => this.goFeed()}>
-            <Text>지도로 보기</Text>
+          <View style={styles.buttonContainer}>
+          <TouchableHighlight onPress={() => this.goFeed()}
+          style={{backgroundColor:'#547280', alignItems:'center', justifyContent:'center'}}>
+            <Text style={{color:'#FFFFFF', fontSize:20, fontWeight:'bold'}}>지도로 보기</Text>
           </TouchableHighlight>
+          </View>
           <ScrollView>
           <View style={{marginTop: 22}}>
             <View>
@@ -115,7 +135,7 @@ export default class Profile extends Component{
                     <CardItem>
                       <Body>
                         <Text>{this.state.title_info.photo_title}</Text>
-                        <Image source={{uri: 'https://ce4c367a.ngrok.io' + image.photo_url}} style={{height:350, width:310, resizeMode:'contain', flex: 1}}/>
+                        <Image source={{uri: 'https://487c1530.ngrok.io' + image.photo_url}} style={{height:350, width:310, resizeMode:'contain', flex: 1}}/>
                         <Text>
                         {image.photo_description}
                         </Text>  
@@ -127,17 +147,15 @@ export default class Profile extends Component{
               <TouchableHighlight
                 onPress={() => {
                   this.setModalVisible(!this.state.modalVisible, "uri");
-                }}>
-                <Text>닫기</Text>
+                }}
+                style={{color:'#FFFFFF', backgroundColor:'#547280', height:40, alignItems:'center', justifyContent:'center'}}>
+                <Text style={{color:'#FFFFFF', fontSize:20, fontWeight:'bold'}}>닫기</Text>
               </TouchableHighlight>
             </View>
           </View>
           </ScrollView>
         </Modal>}
         </Content>
-        <Footer>
-          <Text>테스트</Text>
-        </Footer>
       </Container>
         
       );
@@ -145,7 +163,11 @@ export default class Profile extends Component{
   }
 
 const styles = StyleSheet.create({
-  content: {
-
-  }
+  container: {
+    backgroundColor:'#C4CACC',
+  },
+  header: {
+    backgroundColor:'#7A7E80'
+  },
+  
 })

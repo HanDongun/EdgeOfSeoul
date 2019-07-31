@@ -4,7 +4,8 @@ import {
   View,
   TextInput,
   Button,
-  
+  Text,
+  Image
 } from 'react-native';
 import RNFetchBlob from 'react-native-fetch-blob'
 import ImagePicker from 'react-native-image-picker'
@@ -15,7 +16,9 @@ class EditProfile extends Component {
     this.state = {
         user_desc: '',
         uri: null,
-        user_id: this.props.navigation.getParms(user_id)
+        user_id: this.props.navigation.getParam('user_id'),
+        filename: ''
+        //user_id: this.props.navigation.getParms(user_id)
     }
 
     
@@ -31,17 +34,18 @@ class EditProfile extends Component {
      
      this.setState({
         uri: response.uri,
-        fileName: response.fileName,
+        filename: response.fileName,
      });
      
   });}
     
     registers = () => {
-        RNFetchBlob.fetch('POST',  'https://7ecc0cea.ngrok.io/member/profile_alter/' + this.state.user_id, {
+        RNFetchBlob.fetch('POST',  'https://487c1530.ngrok.io/appServer/member/profile_alter/' + this.state.user_id, {
                     'Content-Type': 'multipart/form-data',
         }, 
         [
-        {name: 'user_profile', data: RNFetchBlob.wrap(this.state.uri)},
+        { name: 'file', filename: this.state.filename, data: RNFetchBlob.wrap(this.state.uri)},
+        
         {name: 'user_desc', data: this.state.user_desc}
         ]
                
@@ -60,16 +64,18 @@ class EditProfile extends Component {
     return (
         
       <View style={styles.container}>
-        <View style={styles.inputContainer}>
-        <Button title="Choose Photo" onPress={this.handleChoosePhoto.bind(this)} />
+        <View>
+       
+        {this.state.image_return && <Image source={{uri:'https://487c1530.ngrok.io' + this.state.image_return.photo_url}} style={{height:50, width:50, resizeMode:'contain', flex: 1}}/>}
+        <Button title="Choose Photo" onPress={this.handleChoosePhoto} />
         </View>
         <View style={styles.inputContainer}>
           <TextInput style={styles.inputs}
               placeholder="자기소개"
-              secureTextEntry={true}
               underlineColorAndroid='transparent'
               onChangeText={(user_desc) => this.setState({user_desc : user_desc})}/>
         </View>
+        <Button title="전송" onPress={()=>this.registers()} ></Button>
       </View>
     );
   }

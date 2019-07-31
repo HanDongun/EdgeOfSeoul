@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   TextInput,
   Button,
   TouchableHighlight,
   Image,
-  Alert
+  Alert,
+  ScrollView
 } from 'react-native';
+import {Container, Header, Content, Title, Body, Icon, Item, Input, Text} from 'native-base';
 
 class Login extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class Login extends Component {
       Alert.alert("확인", "이메일이나 비밀번호를 확인하세요.")
     }
     else{
-    fetch('https://ce4c367a.ngrok.io/appServer/member/login', {
+    fetch('https://487c1530.ngrok.io/appServer/member/login', {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     body: JSON.stringify({email_address: this.state.email_address, user_pwd: this.state.user_pwd})
@@ -61,8 +62,14 @@ gomain = () => {
 
   render() {
     return (
-      <View style={styles.container}>
-      <Text>{JSON.stringify(this.state.returnchecker)} </Text>
+      <Container style={styles.container}>
+        <Header span style={styles.header}>
+          <Title style={{fontSize:32, fontWeight:'bold'}}>Login</Title>
+        </Header>
+
+        <ScrollView>
+        <Content contentContainerStyle={styles.content}>
+      
         <View style={styles.inputContainer}>
           <TextInput style={styles.inputs}
               placeholder="Email"
@@ -91,17 +98,27 @@ gomain = () => {
             <Text>Register</Text>
         </TouchableHighlight>
         {this.state.returnchecker && this.gomain()}
-      </View>
+
+        </Content>
+        </ScrollView>
+      </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#C4CACE',
+  },
+  header: {
+    alignItems: 'center',
+    backgroundColor: '#7A7E80',
+    marginBottom: 20
+  },
+  content: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DCDCDC',
   },
   inputContainer: {
       borderBottomColor: '#F5FCFF',
@@ -120,12 +137,6 @@ const styles = StyleSheet.create({
       borderBottomColor: '#FFFFFF',
       flex:1,
   },
-  inputIcon:{
-    width:30,
-    height:30,
-    marginLeft:15,
-    justifyContent: 'center'
-  },
   buttonContainer: {
     height:45,
     flexDirection: 'row',
@@ -136,10 +147,10 @@ const styles = StyleSheet.create({
     borderRadius:30,
   },
   loginButton: {
-    backgroundColor: "#00b5ec",
+    backgroundColor: "#547280",
   },
   loginText: {
-    color: 'white',
+    color: '#FFFFFF',
   }
 });
 

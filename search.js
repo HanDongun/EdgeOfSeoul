@@ -37,7 +37,7 @@ class Search_place extends Component {
   }
   
   search_place = () => {
-    fetch('https://ce4c367a.ngrok.io/appServer/findPlace', {
+    fetch('https://487c1530.ngrok.io/appServer/findPlace', {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     body: JSON.stringify({search_keyword:this.state.search_keyword})
@@ -97,8 +97,9 @@ class Search_place extends Component {
               underlineColorAndroid='transparent'
               onChangeText={(word) => this.setState({search_keyword: word})}/>
         </View>
-        <Button title="완료" onPress={() => this.search_place()}>
-        </Button>
+        <TouchableHighlight style={styles.button} onPress={() => this.search_place()}>
+        <Text style={{color:'#FFFFFF', fontSize: 20, fontWeight: 'bold'}}>검색</Text>
+        </TouchableHighlight>
         {this.show_placepic()}
         <MapView  
           provider={PROVIDER_GOOGLE}
@@ -107,7 +108,6 @@ class Search_place extends Component {
             this.state.region
           }
           region={this.state.region}
-          onRegionChange={this.onRegionChange}
           >
         <MapView.Circle
         center={{
@@ -137,11 +137,18 @@ class Search_place extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: { ... StyleSheet.absoluteFillObject },
-  map: { ...StyleSheet.absoluteFillObject, top:120 },
+  container: { ... StyleSheet.absoluteFillObject, backgroundColor:'#C4CACC' },
+  map: { ...StyleSheet.absoluteFillObject, top:80 },
   image: {
     width: width / 2, height: width / 2
   },
-
+  inputs: {
+    backgroundColor:'#FFFFFF'
+  },
+  button: {
+    backgroundColor:'#547280',
+    justifyContent:'center',
+    alignItems:'center'
+  }
 })
 export default Search_place

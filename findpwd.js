@@ -16,33 +16,21 @@ class FindPwd extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        name: '',
-        email: '',
+        user_name: '',
+        email_address: '',
         check: '',
     }
     this.showpwd = this.showpwd.bind(this);
+    this.registers = this.registers.bind(this);
   }
 
-    doublecheck = () => {
-        fetch('https://a89ab0aa.ngrok.io/spring01/json', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({email: this.state.email})
-    })
-    .then((response) => response.json())
-    .then((responseJson) => this.setState({
-        check: responseJson,
-    })
-    
-    )
-    .catch((err) => { console.log(err); })
-    }
+
     
     registers = () => {
-        fetch('https://a89ab0aa.ngrok.io/spring01/json', {
+        fetch('https://487c1530.ngrok.io/member/findPw', {
         method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({name: this.state.name, email: this.state.email})
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({user_name: this.state.name, email_address: this.state.email})
     })
     .then((response) => response.json())
     .then((responseJson) => this.setState({
@@ -76,7 +64,7 @@ class FindPwd extends Component {
         <TextInput style={styles.inputs}
           placeholder="Name"
           underlineColorAndroid='transparent'
-          onChangeText={(name) => this.setState({name : name})}/>
+          onChangeText={(name) => this.setState({user_name : name})}/>
         </View>
       
       
@@ -86,7 +74,7 @@ class FindPwd extends Component {
               placeholder="Email"
               keyboardType="email-address"
               underlineColorAndroid='transparent'
-              onChangeText={(email) => this.setState({email : email,
+              onChangeText={(email) => this.setState({email_address : email,
            })}/>
               
         </View>

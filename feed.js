@@ -31,7 +31,7 @@ export default class Feed extends Component{
             <Card>
             <CardItem key={i}>
               <Body>
-                <Image source={{uri : 'https://ce4c367a.ngrok.io/appServer' + image.photo_url}} style={{height:350, width:320, resizeMode:'contain', flex: 1}}/>
+                <Image source={{uri : 'https://487c1530.ngrok.io/appServer' + image.photo_url}} style={{height:350, width:320, resizeMode:'contain', flex: 1}}/>
                 <Text>
                 {image.photo_description}
                 </Text>
