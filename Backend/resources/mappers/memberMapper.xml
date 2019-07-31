@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">
+
+	<insert id="insertMember" parameterType="MemberDto">
+	<selectKey keyProperty="user_id" resultType="int" order="BEFORE">
+	    select SEQ_USER_ID.nextval FROM DUAL
+	</selectKey>
+		insert into member (user_id,user_pwd,user_name,email_address)
+		values
+		(#{user_id}, #{user_pwd},#{user_name},#{email_address} )
+	</insert>
+	
+	<select id="checkEmail" resultType="int">
+		select count(*) from member
+		where email_address=#{email_address}
+	</select>
+	
+	<update id="updateKey">
+		update member set key=#{key}
+		where user_id=#{user_id}
+	</update>
+	
+	<update id="alterKey">
+		update member set key='Y'
+		where user_id=#{user_id} and key=#{key}
+	</update>
+	
+	<update id="alterProfile">
+		update member set user_profile_pic_url=#{user_profile_pic_url}, user_desc = #{user_desc}
+		where user_id=#{user_id}
+	</update>
+	
+	<select id="checkLogin" resultType = "memberDto">
+	select * from member
+	where email_address=#{email_address} and user_pwd=#{user_pwd}
+	</select>
+
+	<delete id="deleteMember">
+		delete from member where user_id=#{user_id}
+	</delete>
+	
+	<update id="updatePw">
+		update member set user_password=#{user_password}
+		where user_email=#{user_email}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

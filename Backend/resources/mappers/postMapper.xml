@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="post">
+	
+	<select id="viewPost" resultType="postDto">
+		select * from post
+		where
+		user_id=#{user_id}
+	</select>
+	
+	<select id="viewPostDetail" resultType="photoDto">
+		select * from photo
+		where
+		user_id=#{user_id} and post_id=#{post_id}
+	</select>
+	
+	
+	<select id="selectPostId" resultType="int">
+		select COUNT(post_id) from post
+		where
+		user_id=#{user_id}
+	</select>
+	
+	<insert id="insertPost" parameterType="PostDto">
+		insert into post (user_id,post_id,title_photo_url,post_title)
+		values
+		( #{user_id},#{post_id},#{title_photo_url},#{post_title})
+	</insert>
+	
+	<delete id="deletePost" parameterType="PostDto">
+		delete post
+		where
+		user_id=#{user_id} and post_id=#{post_id}
+	</delete>
+</mapper>

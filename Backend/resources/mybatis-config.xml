@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<typeAliases>
+	<typeAlias alias="memberDto" type="org.project.appServer.model.member.dto.MemberDTO"/>
+	<typeAlias alias="postDto" type="org.project.appServer.model.post.dto.PostDTO"/>
+	<typeAlias alias="photoDto" type="org.project.appServer.model.photo.dto.PhotoDTO"/>
+	<typeAlias alias="tourDto" type="org.project.appServer.model.tourPlace.dto.TourDTO"/>
+	</typeAliases>
+
+</configuration>
+
