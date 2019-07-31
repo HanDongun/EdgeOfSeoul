@@ -27,7 +27,7 @@ export default class Register extends Component {
             Alert.alert("이메일 입력", "이메일을 입력하세요.");
           } 
           else {
-            fetch('https://487c1530.ngrok.io/appServer/member/checkEmail', {
+            fetch(web_url, {
             method: 'POST',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
             body: JSON.stringify({email_address: this.state.email_address})
@@ -41,7 +41,7 @@ export default class Register extends Component {
         }
       }
         registers = () => {
-            fetch('https://487c1530.ngrok.io/appServer/member/signIn', {
+            fetch(web_url, {
             method: 'POST',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
             body: JSON.stringify({user_name: this.state.user_name, email_address: this.state.email_address, user_pwd: this.state.user_pwd})
