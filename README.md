@@ -27,7 +27,20 @@
 
 <img src = './assets/회원가입1.jpg' width = '400' height = '640' />   <img src = './assets/회원가입2.jpg' width = '400' height = '640' />
 
+### 일지 추가
+
+<img src = './assets/일지작성1.jpg' width = '400' height = '640' />   <img src = './assets/일지작성2.jpg' width = '400' height = '640' />
+
+### 일지 내용 작성
+
+<img src = './assets/일지작성3.jpg' width = '400' height = '640' />   <img src = './assets/일지작성4.jpg' width = '400' height = '640' />
+
+### 일지 지도 보기
+
+<img src = './assets/일지작성5.jpg' width = '400' height = '640' />   <img src = './assets/일지작성6.jpg' width = '400' height = '640' />
+
 ### 관광지 검색
 
 <img src = './assets/관광지1.jpg' width = '400' height = '640' />     <img src = './assets/관광지2.jpg' width = '400' height = '640' />
 <img src = './assets/관광지3.jpg' width = '400' height = '640' />
+
