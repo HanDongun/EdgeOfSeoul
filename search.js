@@ -37,7 +37,7 @@ class Search_place extends Component {
   }
   
   search_place = () => {
-    fetch('https://487c1530.ngrok.io/appServer/findPlace', {
+    fetch(web_url, {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     body: JSON.stringify({search_keyword:this.state.search_keyword})
