@@ -4,7 +4,7 @@ import { Card, CardItem, Thumbnail, Body, Left, Right, Button, Content, Containe
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const { width, height } = Dimensions.get('window');
-
+const web_url = 'http://52.78.132.18:8080';
 export default class Feed extends Component{
   constructor(props){
     super(props);  
@@ -31,7 +31,7 @@ export default class Feed extends Component{
             <Card>
             <CardItem key={i}>
               <Body>
-                <Image source={{uri : web_url + image.photo_url}} style={{height:350, width:320, resizeMode:'contain', flex: 1}}/>
+                <Image source={{uri : web_url + '/appServer' + image.photo_url}} style={{height:350, width:320, resizeMode:'contain', flex: 1}}/>
                 <Text>
                 {image.photo_description}
                 </Text>

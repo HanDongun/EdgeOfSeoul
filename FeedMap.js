@@ -3,7 +3,7 @@ import { Dimensions, TouchableHighlight, Modal, Image, Button, StyleSheet, Text,
 import MapView, { PROVIDER_GOOGLE, Polygon, Marker } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
 import { Card, CardItem, Thumbnail, Body, Left, Right, Content, Container, Header } from 'native-base';
 const { width, height } = Dimensions.get('window');
-
+const web_url = 'http://52.78.132.18:8080';
 class FeedMap extends Component {
   constructor(props){
     super(props);

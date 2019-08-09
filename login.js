@@ -10,7 +10,7 @@ import {
   ScrollView
 } from 'react-native';
 import {Container, Header, Content, Title, Body, Icon, Item, Input, Text} from 'native-base';
-
+const web_url = 'http://52.78.132.18:8080';
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +27,7 @@ class Login extends Component {
       Alert.alert("확인", "이메일이나 비밀번호를 확인하세요.")
     }
     else{
-    fetch(web_url, {
+    fetch(web_url + '/appServer/member/login', {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     body: JSON.stringify({email_address: this.state.email_address, user_pwd: this.state.user_pwd})

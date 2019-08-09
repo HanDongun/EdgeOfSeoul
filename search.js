@@ -3,6 +3,7 @@ import { Dimensions, TouchableHighlight, Modal, Image, Button, StyleSheet, Text,
 import MapView, { PROVIDER_GOOGLE, Polygon, Marker } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
 import {Card, CardItem} from 'native-base';
 const { width, height } = Dimensions.get('window');
+const web_url = 'http://52.78.132.18:8080';
 
 class Search_place extends Component {
   constructor(props){
@@ -37,7 +38,7 @@ class Search_place extends Component {
   }
   
   search_place = () => {
-    fetch(web_url, {
+    fetch(web_url + '/appServer/findPlace', {
     method: 'POST',
     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
     body: JSON.stringify({search_keyword:this.state.search_keyword})

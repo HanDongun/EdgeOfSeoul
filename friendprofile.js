@@ -6,12 +6,13 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import RNFetchBlob from 'react-native-fetch-blob';
 const { width, height } = Dimensions.get('window');
 const web_url = 'http://52.78.132.18:8080';
-export default class Profile extends Component{
+export default class FriendProfile extends Component{
   constructor(props){
     super(props);  
     this.state = {
       user_id: this.props.navigation.getParam('user_id'),
-      log_info: this.props.navigation.getParam('log_info'),
+      log_info: this.props.navigation.getParam('friend_log_info'),
+      friend_info: this.props.navigation.getParam('friend_info'),
       post_id: null,
       post_info: null,
       title_info: null,
@@ -19,10 +20,7 @@ export default class Profile extends Component{
       modalVisible: false,
     }
     
-    this.getPost = this.getPost.bind(this);
-    this.gopost = this.gopost.bind(this);
-    this.setModalVisible = this.setModalVisible.bind(this);
-    this.goFeed = this.goFeed.bind(this);
+    
   }
 
   getPost = (post_id) => {
@@ -40,7 +38,7 @@ export default class Profile extends Component{
           console.log(err);
     })
   }
-
+/*
   componentDidMount = () => {
     RNFetchBlob.fetch('POST',  web_url + '/appServer/appMain/' + this.state.user_id , {
       
@@ -53,7 +51,7 @@ export default class Profile extends Component{
     .catch((err) => {
       console.log(err);    })
   }
-
+*/
   gopost = () => {
     if(this.state.post_change === true){
       this.props.navigation.navigate('Feed', {post_info: this.state.post_info});
@@ -71,6 +69,19 @@ export default class Profile extends Component{
     this.props.navigation.navigate("FeedMap", {post_info:this.state.post_info})
     
   }
+  addfriend = () => {
+    fetch(web_url + '/appServer/member/addFriend/' + this.state.user_id, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({friend_id:this.state.friend_info.user_id})
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {this.setState({
+            place: responseJson, 
+        })}
+        )
+        .catch((err) => { console.log(err); })
+  }
   render(){
     
       return (
@@ -84,18 +95,17 @@ export default class Profile extends Component{
           <Text style={{color:'#FFFFFF'}}>{this.state.log_info.user_desc}</Text>
           </Body>
           <Right>
-          <TouchableHighlight onPress={() => this.props.navigation.navigate("EditProfile", {user_id:this.state.user_id})}>
-          <Text>편집</Text>
+          <TouchableHighlight onPress={() => this.addfriend()}>
+          <Text>친구추가</Text>
           </TouchableHighlight>
           </Right>
         </Header>
         <Content contentContainerStyle={styles.content}>
         <Card>
-          {this.state.title_info && this.state.title_info.map((image, i) =>{
+          {this.state.friend_info && this.state.friend_info.map((image, i) =>{
           return(
             <TouchableHighlight key={i} onPress={()=>this.getPost(image.post_id)}>
               <Card>
-              
               <CardItem>
                 <Body>
                 <Text style={{fontSize:16}}>{image.post_title}</Text>
@@ -134,7 +144,7 @@ export default class Profile extends Component{
                   <Card key = {i}>
                     <CardItem>
                       <Body>
-                        <Text>{this.state.title_info.photo_title}</Text>
+                        <Text>{this.state.friend_info.photo_title}</Text>
                         <Image source={{uri: web_url + image.photo_url}} style={{height:350, width:310, resizeMode:'contain', flex: 1}}/>
                         <Text>
                         {image.photo_description}

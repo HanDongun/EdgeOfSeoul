@@ -10,7 +10,7 @@ import {
   Alert,
   ScrollView
 } from 'react-native';
-
+const web_url = 'http://52.78.132.18:8080';
 class FindPwd extends Component {
 
   constructor(props) {
@@ -27,7 +27,7 @@ class FindPwd extends Component {
 
     
     registers = () => {
-        fetch(web_url, {
+        fetch(web_url + '/member/findPw', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({user_name: this.state.name, email_address: this.state.email})

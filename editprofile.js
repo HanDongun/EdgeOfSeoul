@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import RNFetchBlob from 'react-native-fetch-blob'
 import ImagePicker from 'react-native-image-picker'
+
+const web_url = 'http://52.78.132.18:8080';
 class EditProfile extends Component {
 
   constructor(props) {
@@ -40,7 +42,7 @@ class EditProfile extends Component {
   });}
     
     registers = () => {
-        RNFetchBlob.fetch('POST',  web_url + this.state.user_id, {
+        RNFetchBlob.fetch('POST',  web_url + '/appServer/member/profile_alter/' + this.state.user_id, {
                     'Content-Type': 'multipart/form-data',
         }, 
         [

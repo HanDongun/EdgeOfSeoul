@@ -5,7 +5,7 @@ import RNFetchBlob from 'react-native-fetch-blob';
 import { Card, CardItem, Thumbnail, Body, Left, Right, Content, Container, Header } from 'native-base';
 
 const { width, height } = Dimensions.get('window');
-
+const web_url = 'http://52.78.132.18:8080';
 class MapTest extends Component {
   constructor(props){
     super(props);
@@ -41,7 +41,7 @@ class MapTest extends Component {
     this.setState({ send_photo: final})
   }
   complete = () => {
-    RNFetchBlob.fetch('POST',  web_url + this.state.user_id , {
+    RNFetchBlob.fetch('POST',  web_url + '/appServer/postUpload/' + this.state.user_id , {
                     'Content-Type': 'multipart/form-data',
         }, 
         this.state.send_photo

@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import {ScrollView, StyleSheet, TextInput, View, Image, TouchableHighlight, Alert} from 'react-native';
 import {Container, Header, Content, Left, Right, Title, Subtitle, Body, Button, Icon, Item, Input, Text} from 'native-base';
-
+const web_url = 'http://52.78.132.18:8080';
 export default class Register extends Component {
     constructor(props) {
         super(props);
@@ -27,7 +27,7 @@ export default class Register extends Component {
             Alert.alert("이메일 입력", "이메일을 입력하세요.");
           } 
           else {
-            fetch(web_url, {
+            fetch(web_url + '/appServer/member/checkEmail', {
             method: 'POST',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
             body: JSON.stringify({email_address: this.state.email_address})
@@ -41,7 +41,7 @@ export default class Register extends Component {
         }
       }
         registers = () => {
-            fetch(web_url, {
+            fetch(web_url + '/appServer/member/signIn', {
             method: 'POST',
             headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
             body: JSON.stringify({user_name: this.state.user_name, email_address: this.state.email_address, user_pwd: this.state.user_pwd})

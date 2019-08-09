@@ -14,9 +14,12 @@ import Feed from './feed.js'
 import Submit2 from './Submit2.js'
 import FeedMap from './FeedMap.js'
 import Register2 from './Register2.js'
+import FriendList from './friendlist.js'
+import FriendProfile from './friendprofile.js'
+import SearchFriend from './searchfriend.js'
 const RootStack = createStackNavigator(
   {
-  
+    
     Home: Login,
     Register: Register2,
     FindPwd: FindPwd,
@@ -27,10 +30,12 @@ const RootStack = createStackNavigator(
     Feed: Feed,
     FeedMap: FeedMap,
     Home4: Register2,
+    FriendProfile: FriendProfile,
     MainS: createBottomTabNavigator({
       일지보기: Profile,
       일지추가: ImagePickers,
-      관광지검색: Search_place},
+      관광지검색: Search_place,
+      친구목록: SearchFriend},
       {
         defaultNavigationOptions: ({ navigation }) => ({
           tabBarIcon: ({ focused, horizontal, tintColor }) => {
