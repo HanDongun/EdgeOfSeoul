@@ -43,7 +43,7 @@
 ### 일지 추가
 
 <img src = './assets/일지작성1.jpg' width = '400' height = '640' />   <img src = './assets/일지작성2.jpg' width = '400' height = '640' />
-
+aa
 ### 일지 내용 작성
 
 <img src = './assets/일지작성3.jpg' width = '400' height = '640' />   <img src = './assets/일지작성4.jpg' width = '400' height = '640' />
